@@ -20,8 +20,21 @@ module.exports = {
         .where('schemes.id', id)
     },
     add(scheme) {
-        return db('schemes').insert(scheme).value('schemes.scheme_name')
+        return db('schemes')
+        .insert(scheme_name = scheme)
+    },
+    update(changes, id){
+        return db('schemes').update(changes).where({ id })
+    },
+    remove(id){
+        if(!id){
+            return Promise.resolve(null)
+        }
+        else{
+            return db('schemes').where({ id }).del()
+        }
     }
+
 
 
 }
