@@ -25,12 +25,7 @@ module.exports = {
     },
     update(changes, id){
         
-        if(!changes){
-            return Promise.resolve(null)
-        }
-        else{
-            return db('schemes').update(changes,id).where({ id }).first()
-        }     
+       return db('schemes').where('id',id).update(changes)
         
     },
     remove(id){
