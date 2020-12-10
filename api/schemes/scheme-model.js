@@ -24,7 +24,14 @@ module.exports = {
         .insert(scheme_name = scheme)
     },
     update(changes, id){
-        return db('schemes').update(changes).where({ id })
+        
+        if(!changes){
+            return Promise.resolve(null)
+        }
+        else{
+            return db('schemes').update(changes,id).where({ id }).first()
+        }     
+        
     },
     remove(id){
         if(!id){
@@ -34,7 +41,4 @@ module.exports = {
             return db('schemes').where({ id }).del()
         }
     }
-
-
-
 }
